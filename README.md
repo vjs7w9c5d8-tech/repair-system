@@ -28,8 +28,18 @@
 
 ![手機篩選畫面（虛構示範資料）](docs/urgency-filters-mobile.png)
 
+## PWA 安裝與離線
+
+網站提供 Web App Manifest、桌面圖示及 Service Worker，可在支援的瀏覽器安裝為獨立視窗。Android Chrome 可按頁面出現的「安裝報修登記」或瀏覽器選單「安裝應用程式」；iPhone 請使用 Safari 分享選單的「加入主畫面」。安裝入口是否出現由瀏覽器決定，需使用 HTTPS（GitHub Pages）或 localhost；手機直接開啟區網 HTTP 網址無法驗證 PWA 安裝。
+
+先連線開啟一次，等待快取就緒後，即可離線重開頁面。Service Worker 只快取固定靜態頁面、圖示及成功載入的 Supabase CDN 程式庫，不快取資料庫 API、報修清單或填寫內容。離線時會顯示提示，新增及讀取最新清單仍需要網路；不提供離線排程、自動重送或持久保存草稿。重新載入會遺失未送出的內容；若 CDN 尚未快取，離線時表單會顯示程式庫載入失敗提示。
+
+連線恢復後可手動重新整理清單或再按送出。新版本下載完成時會提供「更新並重新載入」按鈕，請先處理未送出的表單再更新。每次修改靜態資源時，需一併更新 `sw.js` 的快取版本。Manifest 的相對網址及 Service Worker 範圍皆支援 GitHub Pages 的 `/repair-system/` 子目錄。
+
 ## 開發與驗證
 
 在儲存庫根目錄執行 `npm ci`，再執行 `npm run dev`，瀏覽 `http://localhost:8000`。
 
 `npm run lint` 檢查格式與 JavaScript 語法；`npm test` 使用 Playwright 與本機 Chromium（可用 `CHROMIUM_PATH` 指定執行檔），以模擬 API 檢查手機版、必填驗證、資料欄位、排序查詢、成功／錯誤訊息及 HTML 注入防護。測試不會寫入真實資料庫。實際資料庫連線及 RLS 仍需在 Project URL 設定完成後驗證。
+
+PWA 測試另以本機 `/repair-system/` 子目錄驗證 Chromium 解析 Manifest、靜態快取與離線重開、離線禁止送出、恢復連線後手動送出，以及新版本提示／使用者更新／舊快取清理。測試使用模擬 SDK 與虛構資料，不驗證真實 Supabase 連線，也不代表已在 iPhone 或 Android 實機完成安裝。可用 `PWA_SCREENSHOT_PATH=/tmp/pwa.png npm test` 匯出離線畫面。

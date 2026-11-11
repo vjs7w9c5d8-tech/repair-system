@@ -64,6 +64,21 @@ main {
 .intro {
   margin-bottom: 32px;
 }
+.pwa-panel {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: #e6efe7;
+  border-radius: 12px;
+  font-size: 13px;
+  color: #46604f;
+}
+.pwa-panel button {
+  justify-self: start;
+  max-width: 100%;
+  white-space: normal;
+}
 .eyebrow {
   color: #176452;
   font-size: 12px;
