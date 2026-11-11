@@ -4,14 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#176452" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="報修登記" />
     <title>報修登記｜維護服務站</title>
     <link rel="stylesheet" href="./style.css" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" type="image/png" href="./assets/icon-192.png" />
+    <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" />
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"
     ></script>
     <script defer src="./config.js"></script>
     <script defer src="./app.js"></script>
+    <script defer src="./pwa.js"></script>
   </head>
   <body>
     <header class="site-header">
@@ -28,6 +34,20 @@
         <h1>報修登記</h1>
         <p>設備故障、網路異常或環境問題，請在這裡告訴我們。</p>
       </div>
+      <aside class="pwa-panel" aria-label="安裝與連線狀態">
+        <p>
+          可從瀏覽器選單「安裝應用程式」加入桌面；iPhone 請用 Safari
+          的分享選單「加入主畫面」。
+        </p>
+        <button id="install-button" class="secondary" type="button" hidden>
+          安裝報修登記
+        </button>
+        <p id="connection-message" role="status" aria-live="polite" hidden></p>
+        <p id="pwa-message" role="status" aria-live="polite" hidden></p>
+        <button id="update-button" class="secondary" type="button" hidden>
+          更新並重新載入（未送出內容將清除）
+        </button>
+      </aside>
       <section class="panel" aria-labelledby="form-title">
         <div class="section-heading">
           <span class="step" aria-hidden="true">01</span>

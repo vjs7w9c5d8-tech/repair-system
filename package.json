@@ -3,9 +3,9 @@
   "private": true,
   "scripts": {
     "dev": "python3 -m http.server 8000",
-    "format": "prettier --write index.html style.css app.js config.js tests/frontend.test.cjs package.json README.md",
-    "lint": "prettier --check index.html style.css app.js config.js tests/frontend.test.cjs package.json README.md && node --check app.js && node --check config.js",
-    "test": "node --test tests/frontend.test.cjs"
+    "format": "prettier --write index.html style.css app.js config.js pwa.js sw.js manifest.webmanifest tests/*.test.cjs package.json README.md",
+    "lint": "prettier --check index.html style.css app.js config.js pwa.js sw.js manifest.webmanifest tests/*.test.cjs package.json README.md && node --check app.js && node --check config.js && node --check pwa.js && node --check sw.js",
+    "test": "node --test tests/*.test.cjs"
   },
   "devDependencies": {
     "playwright": "1.56.1",

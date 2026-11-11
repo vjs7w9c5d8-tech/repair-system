@@ -102,6 +102,14 @@
   });
 
   async function loadRequests() {
+    if (!navigator.onLine) {
+      showMessage(
+        listMessage,
+        "目前離線，無法取得最新報修。已顯示的紀錄不會自動更新，連線恢復後請按重新整理。",
+        "error",
+      );
+      return;
+    }
     refreshButton.disabled = true;
     list.setAttribute("aria-busy", "true");
     showMessage(listMessage, "正在讀取報修紀錄…");
@@ -135,6 +143,14 @@
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
     if (submitting || !client) return;
+    if (!navigator.onLine) {
+      showMessage(
+        formMessage,
+        "目前離線，這筆報修尚未送出。請保留此頁，恢復連線後再按送出；重新載入會清除未送出的內容。",
+        "error",
+      );
+      return;
+    }
     const values = new FormData(form);
     const payload = {};
     for (const name of [
