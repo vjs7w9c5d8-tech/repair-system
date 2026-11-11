@@ -4,6 +4,8 @@
 
 [報修系統操作說明（Word）](文件/報修系統操作說明.docx)
 
+[報修登記系統提案（PowerPoint）](文件/報修登記系統提案.pptx)
+
 ## 報修登記網頁
 
 首頁為根目錄 `index.html`，使用純 HTML/CSS/JavaScript，透過 CDN 載入 supabase-js v2，不需要建置。
