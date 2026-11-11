@@ -3,6 +3,6 @@
 // publishable key 可公開；此處不可使用 secret 或 service-role 金鑰。
 window.REPAIR_CONFIG = Object.freeze({
   siteUrl: "https://vjs7w9c5d8-tech.github.io/repair-system/",
-  supabaseUrl: "",
+  supabaseUrl: "https://lnimvlaxyozckrypjbbs.supabase.co",
   supabasePublishableKey: "sb_publishable_cvxXnNN-KrqpZxFNWHvLqw_CxRhmGbY",
 });

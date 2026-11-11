@@ -82,12 +82,6 @@ test("手機表單、資料庫契約、錯誤處理與安全清單呈現", async
         }),
       };
     });
-    await page.route("https://repair.test/config.js", (route) =>
-      route.fulfill({
-        contentType: "application/javascript",
-        body: 'window.REPAIR_CONFIG = {supabaseUrl:"https://example.supabase.co",supabasePublishableKey:"sb_publishable_test"};',
-      }),
-    );
     await page.goto("https://repair.test/");
     await page.locator(".request-card").waitFor();
     assert.equal(await page.locator(".request-card img").count(), 0);
@@ -170,7 +164,12 @@ test("手機表單、資料庫契約、錯誤處理與安全清單呈現", async
         .querySelector("#list-message")
         .textContent.includes("測試讀取失敗"),
     );
-    await page.unroute("https://repair.test/config.js");
+    await page.route("https://repair.test/config.js", (route) =>
+      route.fulfill({
+        contentType: "application/javascript",
+        body: 'window.REPAIR_CONFIG = {supabaseUrl:"",supabasePublishableKey:"sb_publishable_test"};',
+      }),
+    );
     await page.reload();
     await page.waitForFunction(() =>
       document
