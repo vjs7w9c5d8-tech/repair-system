@@ -5,3 +5,6 @@ outputs/
 temp/
 tmp/
 .tmp/
+
+node_modules/
+test-results/
