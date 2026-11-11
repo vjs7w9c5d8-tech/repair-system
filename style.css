@@ -221,6 +221,26 @@ button span {
 .secondary:hover:not(:disabled) {
   background: #e6efe7;
 }
+.urgency-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.urgency-filters button {
+  flex: 1;
+  padding: 10px 12px;
+  color: #176452;
+  background: #fff;
+  border-color: #bccdc2;
+}
+.urgency-filters button[aria-pressed="true"] {
+  color: #fff;
+  background: #176452;
+  border-color: #176452;
+}
+.urgency-filters button:hover {
+  color: #fff;
+}
 .message {
   border-radius: 8px;
   padding: 14px 16px;
@@ -277,8 +297,8 @@ button span {
   font-size: 12px;
 }
 .urgency-high {
-  background: #fbe9e4;
-  color: #9b3d2a;
+  background: #fee2e2;
+  color: #b91c1c;
 }
 .urgency-medium {
   background: #fcf2d9;

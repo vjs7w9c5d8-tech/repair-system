@@ -8,9 +8,13 @@
   const formMessage = document.querySelector("#form-message");
   const listMessage = document.querySelector("#list-message");
   const list = document.querySelector("#request-list");
+  const filterButtons = document.querySelectorAll("[data-urgency]");
+  const filterMessage = document.querySelector("#filter-message");
   const config = window.REPAIR_CONFIG || {};
   let client;
   let submitting = false;
+  let requests = [];
+  let selectedUrgency = "全部";
 
   function showMessage(element, text, type = "") {
     element.textContent = text;
@@ -70,6 +74,33 @@
     }
   }
 
+  function renderFilteredRequests() {
+    const filtered =
+      selectedUrgency === "全部"
+        ? requests
+        : requests.filter((request) => request.urgency === selectedUrgency);
+    renderRequests(filtered);
+    showMessage(
+      filterMessage,
+      requests.length && !filtered.length
+        ? `最近 20 筆報修中，沒有緊急程度為「${selectedUrgency}」的紀錄。`
+        : "",
+    );
+  }
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      selectedUrgency = button.dataset.urgency;
+      filterButtons.forEach((filterButton) => {
+        filterButton.setAttribute(
+          "aria-pressed",
+          String(filterButton === button),
+        );
+      });
+      renderFilteredRequests();
+    });
+  });
+
   async function loadRequests() {
     refreshButton.disabled = true;
     list.setAttribute("aria-busy", "true");
@@ -83,7 +114,8 @@
         .order("created_at", { ascending: false })
         .limit(20);
       if (error) throw error;
-      renderRequests(data || []);
+      requests = data || [];
+      renderFilteredRequests();
       showMessage(
         listMessage,
         data?.length ? "" : "目前還沒有報修紀錄。第一筆回報，從這裡開始。",
