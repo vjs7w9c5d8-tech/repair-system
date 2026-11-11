@@ -9,7 +9,7 @@
 - GitHub Pages 預期網址：https://vjs7w9c5d8-tech.github.io/repair-system/
 - Pages 設定：Deploy from a branch → `main` → `/ (root)`。
 - 在 Supabase 執行 `supabase/schema.sql`，設定資料表、欄位授權及 RLS。
-- `config.js` 的 `supabaseUrl` 必須填入 Supabase 控制台提供的 **Project URL**（通常為 `https://專案識別碼.supabase.co`）。GitHub Pages 網址不能作為資料庫網址。目前尚待提供 Project URL，未設定時頁面會顯示提示並停用送出。
+- `config.js` 的 `supabaseUrl` 已設定為 `https://lnimvlaxyozckrypjbbs.supabase.co`。這是 Supabase Project URL，與 GitHub Pages 發佈網址不同；未設定時頁面會顯示提示並停用送出。
 - `supabasePublishableKey` 已填入提供的公開金鑰；禁止換成 secret 或 service-role 金鑰。
 
 新增僅傳送 `reporter_name`、`location`、`category`、`description`、`urgency`，由資料庫產生 `status`、`created_at`、`id`。清單依 `created_at` 降冪取最近 20 筆，時間以台北時區顯示。公開示範請只使用虛構資料。
